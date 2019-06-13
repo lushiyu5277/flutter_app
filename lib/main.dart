@@ -1,18 +1,20 @@
-import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
+import 'dart:async';
 
-void main() => runApp(MyApp());
+import 'package:flutter/material.dart';
+import 'src/article.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return new MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
+      theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: new MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -23,43 +25,54 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyHomePageState createState() => new _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  List<Article> _articles = articles;
 
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              WordPair.random().asCamelCase,
-            ),
-            Text(
-              WordPair.random().asPascalCase,
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
+      body: new RefreshIndicator(
+        onRefresh: () async {
+          await new Future.delayed(const Duration(seconds: 1));
+          setState(() {
+            _articles.removeAt(0);
+          });
+        },
+        child: new ListView(
+          children: _articles.map(_buildItem).toList(),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+    );
+  }
+
+  Widget _buildItem(Article article) {
+    return new Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: new ExpansionTile(
+        title: new Text(article.text, style: new TextStyle(fontSize: 24.0)),
+        children: <Widget>[
+          new Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              new Text("${article.commentsCount} comments"),
+              new IconButton(
+                icon: new Icon(Icons.launch),
+                onPressed: () async {
+                  final fakeUrl = "http://${article.domain}";
+                  if (await canLaunch(fakeUrl)) {
+                    launch(fakeUrl);
+                  }
+                },
+              )
+            ],
+          ),
+        ],
       ),
     );
   }
