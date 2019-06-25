@@ -1,10 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'src/article.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'src/article.dart';
+import 'study/simple_app.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(new SimpleApp());
 
 class MyApp extends StatelessWidget {
   @override
