@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'src/article.dart';
 import 'study/simple_app.dart';
+import 'study/stateless_listview.dart';
 
-void main() => runApp(new SimpleApp());
+void main() => runApp(new ListViewApp());
 
 class MyApp extends StatelessWidget {
   @override
