@@ -5,8 +5,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'src/article.dart';
 import 'study/simple_app.dart';
 import 'study/stateless_listview.dart';
+import 'base/tabs.dart';
 
-void main() => runApp(new ListViewApp());
+void main() => runApp(new TabApp());
 
 class MyApp extends StatelessWidget {
   @override

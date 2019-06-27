@@ -28,7 +28,7 @@ class _ListViewContent extends StatelessWidget{
 
   Widget _buildItem(context, index) {
     return ListTile(
-      title: Text(_articles[index].domain),
+      title: Text(_articles[index].text),
     );
   }
 }
