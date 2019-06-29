@@ -3,16 +3,6 @@ import '../pages/home_page.dart';
 import '../pages/release_page.dart';
 import '../pages/setting_page.dart';
 
-class TabApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomeTabs(),
-    );
-  }
-}
-
-
 class HomeTabs extends StatefulWidget {
   @override
   _HomeTabsState createState() => _HomeTabsState();
