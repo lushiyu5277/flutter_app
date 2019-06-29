@@ -8,11 +8,27 @@ class RowPage extends StatefulWidget {
 class _RowPageState extends State<RowPage> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        width: 300,
-        height: 400,
-        color: Colors.red,
+    return Scaffold(
+      appBar: AppBar(title: Text("Row"),),
+      body: Row(
+        children: <Widget>[
+          Container(
+            width: 100,
+            color: Colors.red,
+          ),
+          Container(
+            width: 100,
+            color: Colors.blue,
+          ),
+          Container(
+            width: 100,
+            color: Colors.yellow,
+          ),
+          Container(
+            width: 100,
+            color: Colors.green,
+          )
+        ],
       ),
     );
   }
