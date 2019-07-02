@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
               return ListTile(
                   title: Text(_pageList[index]),
                   onTap: () {
-                    Navigator.of(context).pushNamed('pages/row_page');
+                    Navigator.of(context).pushNamed(Routers.keys.toList()[index]);
                   });
             }),
       )),
